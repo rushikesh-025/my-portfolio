@@ -315,6 +315,44 @@ h1, h2, h3 {
   font-weight: 500;
 }
 
+.training-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.training-card {
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  transition: var(--transition);
+}
+
+.training-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.12), transparent 65%);
+  pointer-events: none;
+}
+
+.training-card:hover {
+  transform: translateY(-8px) scale(1.01);
+  border-color: rgba(34, 211, 238, 0.5);
+  box-shadow: 0 20px 35px rgba(34, 211, 238, 0.12);
+}
+
+.training-card > div:first-child {
+  position: relative;
+  z-index: 1;
+}
+
+.training-card p {
+  position: relative;
+  z-index: 1;
+}
+
 /* Experience & Projects */
 .experience-container, .projects-grid {
   display: flex;
