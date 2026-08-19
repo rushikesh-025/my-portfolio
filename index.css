@@ -379,14 +379,18 @@ h1, h2, h3 {
 
 .experience-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
   width: 100%;
   margin-top: 2.5rem;
 }
 
 .experience-gallery .img-card {
-  aspect-ratio: 16/9;
+  position: relative;
+  aspect-ratio: 4 / 3;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 16px;
 }
 
 .img-card {
@@ -408,6 +412,37 @@ h1, h2, h3 {
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.experience-gallery .img-card:hover img {
+  transform: scale(1.06);
+}
+
+.experience-gallery .img-card .img-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.9rem 1rem;
+  background: linear-gradient(to top, rgba(2, 6, 23, 0.95) 0%, rgba(2, 6, 23, 0.6) 70%, transparent 100%);
+  color: #f8fafc;
+  font-size: 0.88rem;
+  font-weight: 500;
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.experience-gallery .img-card:hover .img-caption {
+  transform: translateY(0);
+}
+
+.experience-gallery .img-card .img-caption i {
+  color: var(--primary);
+  font-size: 0.85rem;
 }
 
 .project:hover, .exp-card:hover {
@@ -631,4 +666,66 @@ h1, h2, h3 {
 #social-links a:hover {
   color: var(--primary);
   transform: translateY(-3px);
+}
+
+/* Lightbox Modal */
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(2, 6, 23, 0.92);
+  backdrop-filter: blur(12px);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.lightbox.active {
+  display: flex;
+  animation: fadeInUp 0.3s ease-out forwards;
+}
+
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 80vh;
+  border-radius: 16px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--glass-border);
+  object-fit: contain;
+}
+
+.lightbox-caption {
+  margin-top: 1.25rem;
+  color: var(--text-main);
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-family: 'Outfit', sans-serif;
+  text-align: center;
+  background: var(--bg-card);
+  padding: 0.6rem 1.5rem;
+  border-radius: 30px;
+  border: 1px solid var(--glass-border);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  color: var(--text-muted);
+  font-size: 2.5rem;
+  font-weight: 300;
+  cursor: pointer;
+  line-height: 1;
+  transition: var(--transition);
+}
+
+.lightbox-close:hover {
+  color: var(--primary);
+  transform: scale(1.1);
 }
